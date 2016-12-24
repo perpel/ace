@@ -63,7 +63,7 @@ class AceAsset extends AssetBundle
 
 
     public static function options($opt) {
-    	return ArrayHelper::merge([AceAsset::className(), 'depends' => 'common\assets\AceAsset'], $opt);
+    	return ArrayHelper::merge([AceAsset::className(), 'depends'=>'common\assets\AceAsset'], $opt);
     }
 
 
@@ -79,7 +79,7 @@ class AceAsset extends AssetBundle
 
     //导入编辑器
     public static function addCkeditor($view) {
-        $view->registerJsFile('/public/js/utility/ckeditor/ckeditor.js', [AceAsset::className(), 'depends' => 'common\assets\AceAsset']);
+        $view->registerJsFile('/public/js/utility/ckeditor/ckeditor.js', [AceAsset::className(), 'depends'=>'common\assets\AceAsset']);
     }
 
 
