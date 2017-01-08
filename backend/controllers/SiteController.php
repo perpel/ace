@@ -99,13 +99,17 @@ class SiteController extends Controller
 
 	public function actionTest()
 	{
-		$hey = array("a" => "lemon", "b" => "orange", array("a" => "apple", "p" => "pear")); 
-$awesome = new \RecursiveTreeIterator( 
-    new \RecursiveArrayIterator($hey), 
-    null, null, \RecursiveIteratorIterator::LEAVES_ONLY 
-); 
-foreach ($awesome as $line) 
-    echo$line . PHP_EOL;
+		$model = new \common\models\Sidebar;
+
+        // $model->title = 'Dashboard';
+
+        // $model->save();
+        
+        $data = $model->sidebarTree();
+
+        print_r($data);
+
+
 	}
 
 
