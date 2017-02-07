@@ -62,75 +62,63 @@ class SiderBar extends Widget
         return $this->render('sider-bar', ['menu'=>$this->htmlTree]);
     }
 
+
+    /**
+     * @param array $roots
+     * 生成 html tree
+     */
     protected function generateTreeHtml($roots = array())
     {
     	foreach ($roots as $root) {
     		if ($this->hasChildren($root['id'])) {
-    			$this->pushChildrenLi($root);
+    			$this->pushList($root, true);
 				$this->menuQueue->enqueue('<ul class="submenu">');
 				$this->generateTreeHtml($this->getChildren($root['id']));
-				$this->menuQueue->enqueue('</ul>');	
-    			$this->menuQueue->enqueue('</li>');	
+				$this->menuQueue->enqueue('</ul>');
     		} else {
-    			$this->pushAloneLi($root);
+    			$this->pushList($root);
     		}
-    		$this->popLi();
+            $this->menuQueue->enqueue('</li>');
+    		$this->popList();
     	}
     }
 
-
-    protected function pushChildrenLi($node)
+    protected function pushList($node, $ischildren = false)
     {
-    	if ($node['active']) $this->menuQueue->enqueue('<li class="active">');
-    	else $this->menuQueue->enqueue('<li class="">');
+        if ($node['active']) $this->menuQueue->enqueue('<li class="active">');
+        else $this->menuQueue->enqueue('<li class="">');
 
-    	// href
-    	$this->menuQueue->enqueue('<a href="#" class="dropdown-toggle">');
+        // href
+        if ($ischildren) {
+            $this->menuQueue->enqueue('<a href="#" class="dropdown-toggle">');
+        } else {
+            if (empty($node['href'])) $this->menuQueue->enqueue('<a href="#">');
+            else $this->menuQueue->enqueue('<a href="' . $node['href'] . '">');
+        }
 
-    	// icon
-    	if (empty($node['icon'])) $this->menuQueue->enqueue('<i class="menu-icon fa fa-caret-right">');
-    	else $this->menuQueue->enqueue('<i class="menu-icon fa ' . $node['icon'] . '">');
-    	$this->menuQueue->enqueue('</i>');
+        // icon
+        if (empty($node['icon'])) $this->menuQueue->enqueue('<i class="menu-icon fa fa-caret-right">');
+        else $this->menuQueue->enqueue('<i class="menu-icon fa ' . $node['icon'] . '">');
+        $this->menuQueue->enqueue('</i>');
 
-    	// span
-    	$this->menuQueue->enqueue('<span class="menu-text"> ' . $node['title']);
-    	$this->menuQueue->enqueue(' </span>');
+        // span
+        $this->menuQueue->enqueue('<span class="menu-text"> ' . $node['title']);
+        $this->menuQueue->enqueue(' </span>');
 
-    	$this->menuQueue->enqueue('</a>');
-    	// b
-    	$this->menuQueue->enqueue('<b class="arrow">');
-    	$this->menuQueue->enqueue('</b>');
+        // arrow
+        if ($ischildren) {
+            $this->menuQueue->enqueue('<b class="arrow fa fa-angle-down">');
+        } else {
+            $this->menuQueue->enqueue('<b class="arrow">');
+        }
 
+        $this->menuQueue->enqueue('</a>');
+
+        $this->menuQueue->enqueue('</b>');
     }
 
 
-    protected function pushAloneLi($node)
-    {
-    	if ($node['active']) $this->menuQueue->enqueue('<li class="active">');
-    	else $this->menuQueue->enqueue('<li class="">');
-
-    	// href
-    	if (empty($node['href'])) $this->menuQueue->enqueue('<a href="#">');
-    	else $this->menuQueue->enqueue('<a href="' . $node['href'] . '">');
-
-    	// icon
-    	if (empty($node['icon'])) $this->menuQueue->enqueue('<i class="menu-icon fa fa-caret-right">');
-    	else $this->menuQueue->enqueue('<i class="menu-icon fa ' . $node['icon'] . '">');
-    	$this->menuQueue->enqueue('</i>');
-
-    	// span
-    	$this->menuQueue->enqueue('<span class="menu-text"> ' . $node['title']);
-    	$this->menuQueue->enqueue(' </span>');
-
-    	$this->menuQueue->enqueue('</a>');
-    	// b
-    	$this->menuQueue->enqueue('<b class="arrow">');
-    	$this->menuQueue->enqueue('</b>');
-
-    	$this->menuQueue->enqueue('</li>');	
-    }
-
-    protected function popLi()
+    protected function popList()
     {
     	while ($this->menuQueue->count() > 0) {
     		$this->htmlTree .= $this->menuQueue->dequeue();
