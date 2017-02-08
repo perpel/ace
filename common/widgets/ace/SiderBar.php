@@ -1,33 +1,26 @@
 <?php
 namespace common\widgets\ace;
 
+use common\models\Sidebar;
 use yii\base\Widget;
-use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 class SiderBar extends Widget
 {
 
-	protected function arr()
-	{
-		return [
-			['id'=>1, 'parent_id'=>0, 'href'=>'index.html', 'active'=>true, 'icon'=>'fa-tachometer', 'title'=>'Dashboard'],
-			['id'=>5, 'parent_id'=>0, 'href'=>'#', 'active'=>false, 'icon'=>'fa-desktop', 'title'=>'UI &amp; Elements'],
-			['id'=>6, 'parent_id'=>0, 'href'=>'#', 'active'=>false, 'icon'=>'fa-desktop', 'title'=>'666'],
-			['id'=>3, 'parent_id'=>5, 'href'=>'#', 'active'=>false, 'icon'=>'fa-desktop', 'title'=>'333'],
-			['id'=>2, 'parent_id'=>1, 'href'=>'#', 'active'=>false, 'icon'=>'', 'title'=>'222'],
-			['id'=>4, 'parent_id'=>1, 'href'=>'#', 'active'=>false, 'icon'=>'', 'title'=>'444'],
-		];
-	}
-
-	public $tree = [];
+	protected $tree = [[]];
 
 	/**
 	* 生成树形结构数据
 	*/
 	protected function generateTreeArr()
 	{
-		$arr = $this->arr();
-		foreach ($arr as $v) {
+
+	    $nodes = Sidebar::find()
+            ->select(['id', 'parent_id', 'title', 'href', 'icon', 'active', 'sort'])
+            ->asArray()->all();
+
+		foreach ($nodes as $v) {
 			$parent_id = $v['parent_id'];
 			$this->tree[$parent_id][] = $v;
 		}
@@ -47,6 +40,7 @@ class SiderBar extends Widget
 	*/
 	protected function getChildren($parentid)
 	{
+        ArrayHelper::multisort($this->tree[$parentid], 'sort', SORT_DESC);
 		return $this->tree[$parentid];
 	}
 
@@ -58,16 +52,18 @@ class SiderBar extends Widget
     {
     	$this->generateTreeArr();
     	$this->menuQueue = new \SplQueue();
+        ArrayHelper::multisort($this->tree[0], 'sort', SORT_DESC);
     	$this->generateTreeHtml($this->tree[0]);
         return $this->render('sider-bar', ['menu'=>$this->htmlTree]);
     }
+
 
 
     /**
      * @param array $roots
      * 生成 html tree
      */
-    protected function generateTreeHtml($roots = array())
+    protected function generateTreeHtml($roots = [])
     {
     	foreach ($roots as $root) {
     		if ($this->hasChildren($root['id'])) {
