@@ -27,7 +27,14 @@ AceAsset::initAcePage($this);
 	<script type="text/javascript">
 		try{ace.settings.loadState('main-container')}catch(e){}
 	</script>
-	<?= \common\widgets\ace\SiderBar::widget();?>
+
+	<?php
+		if ($this->beginCache(3306, ['duration' => 10])) {
+			// 
+			echo \common\widgets\ace\SiderBar::widget();
+			$this->endCache();
+		}
+	?>
 
 	<div class="main-content">
 		<div class="main-content-inner">
