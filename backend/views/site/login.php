@@ -25,8 +25,8 @@ AceAsset::initAcePage($this);
         <div class="main-content">
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1">
-                    
 
+                    <?= \common\widgets\ace\Login::widget();?>
                     
                 </div><!-- /.col -->
             </div><!-- /.row -->

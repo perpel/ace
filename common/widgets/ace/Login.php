@@ -8,11 +8,10 @@ class Login extends Widget
 
     public function run()
     {
-        return $this->render('navbar', [
-        		'tools'=> [
-        			'tasks'=>$this->tasks()
-        		],
-        		'personal' => $this->personal()
+        return $this->render('login/index', [
+        		'login' => $this->login(),
+        		'register' => $this->register(),
+        		'forgot' => $this->forgot(),
         	]);
     }
 
