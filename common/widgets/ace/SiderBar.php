@@ -1,7 +1,7 @@
 <?php
 namespace common\widgets\ace;
 
-use common\models\Sidebar;
+use common\models\ace\Sidebar;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
