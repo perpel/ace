@@ -1,4 +1,8 @@
-INSERT INTO `sidebar` VALUES (1, ' Dashboard ', '#', 0, 'zh-cn', 'fa-tachometer', 1, 0, 1, 1486565729, 1486565729);
-INSERT INTO `sidebar` VALUES (2, 'UI & Elements', '#', 0, 'zh-cn', 'fa-desktop', 0, 0, 1, 1486565729, 1486565729);
-INSERT INTO `sidebar` VALUES (3, 'Layouts', '#', 2, 'zh-cn', NULL, 0, 0, 1, 1486565729, 1486565729);
-INSERT INTO `sidebar` VALUES (4, 'Top Menu', '#', 3, 'zh-cn', NULL, 0, 0, 1, 1486565729, 1486565729);
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('1', ' Dashboard ', '#', '0', 'zh-cn', 'fa-tachometer', '1', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('2', 'UI & Elements', '#', '0', 'zh-cn', 'fa-desktop', '0', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('3', 'Layouts', '#', '2', 'zh-cn', NULL, '0', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('4', 'Top Menu', '#', '3', 'zh-cn', NULL, '0', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('5', 'Three Level Menu', '#', '2', 'zh-cn', NULL, '0', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('6', 'item #1', '#', '5', 'zh-cn', 'fa-leaf green', '0', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('7', '4th level', '#', '5', 'zh-cn', 'fa-pencil orange', '0', '0', '1', '1486565729', '1486565729');
+INSERT INTO `ace`.`sidebar` (`id`, `title`, `href`, `parent_id`, `language`, `icon`, `active`, `sort`, `status`, `created_at`, `updated_at`) VALUES ('8', 'Add Product', '#', '7', 'zh-cn', 'fa-plus purple', '0', '0', '1', '1486565729', '1486565729');
