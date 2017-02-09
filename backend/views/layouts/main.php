@@ -29,8 +29,9 @@ AceAsset::initAcePage($this);
 	</script>
 
 	<?php
+		// 缓存 key = 菜单栏前缀 + 用户登录ID，有效时间 3600 * 12
 		if ($this->beginCache(3306, ['duration' => 10])) {
-			// 
+			// 导航侧边栏
 			echo \common\widgets\ace\SiderBar::widget();
 			$this->endCache();
 		}

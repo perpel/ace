@@ -99,16 +99,6 @@ class SiteController extends Controller
 
 	public function actionTest()
 	{
-		$model = new \common\models\Sidebar;
-
-        // $model->title = 'Dashboard';
-
-        // $model->save();
-        
-        $data = $model->sidebarTree();
-
-        print_r($data);
-
 
 	}
 
