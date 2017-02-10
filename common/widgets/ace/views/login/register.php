@@ -1,3 +1,6 @@
+<?php
+use yii\bootstrap\ActiveForm;
+?>
 <div id="signup-box" class="signup-box widget-box no-border">
     <div class="widget-body">
         <div class="widget-main">
@@ -9,14 +12,24 @@
             <div class="space-6"></div>
             <p>填写信息: </p>
 
-            <form>
+            <?php $form = ActiveForm::begin([
+                'action'=>['site/signup'],
+                'method'=>'post',
+                'fieldConfig' => [
+                    'template' => "{input}\n{i}\n{hint}\n{error}"
+                ]
+            ]) ?>
+
                 <fieldset>
+
                     <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
                             <input type="email" class="form-control" placeholder="邮箱" />
                             <i class="ace-icon fa fa-envelope"></i>
                         </span>
                     </label>
+
+                    <?= $form->field($signup, 'username')->textInput(['placeholder'=>'用户名'])->hint('fa-user') ?>
 
                     <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
@@ -62,7 +75,9 @@
                         </button>
                     </div>
                 </fieldset>
-            </form>
+
+            <?php ActiveForm::end(); ?>
+
         </div>
 
         <div class="toolbar center">

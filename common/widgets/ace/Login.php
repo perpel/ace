@@ -1,6 +1,7 @@
 <?php
 namespace common\widgets\ace;
 
+use backend\models\SignupForm;
 use yii\base\Widget;
 
 class Login extends Widget
@@ -10,8 +11,8 @@ class Login extends Widget
     {
         return $this->render('login/index', [
         		'login' => $this->login(),
-        		'register' => $this->register(),
-        		'forgot' => $this->forgot(),
+        		'signup' => $this->register(),
+        		'forget' => $this->forgot(),
         	]);
     }
 
@@ -24,7 +25,7 @@ class Login extends Widget
     // 注册用户
     protected function register()
     {
-    	return $this->render('login/register');
+    	return $this->render('login/register', ['signup' => new SignupForm()]);
     }
 
     // 忘记密码

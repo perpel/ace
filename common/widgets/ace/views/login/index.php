@@ -14,7 +14,7 @@
         
 		<?= $login;?>
 
-		<?= $singup;?>
+		<?= $signup;?>
 
 		<?= $forget;?>
 
