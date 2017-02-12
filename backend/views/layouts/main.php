@@ -5,6 +5,7 @@
 use common\assets\AceAsset;
 use yii\helpers\Html;
 use common\widgets\ace\Breadcrumbs;
+use common\libs\cache\AdminCache;
 
 AceAsset::initAcePage($this);
 ?>
@@ -21,7 +22,13 @@ AceAsset::initAcePage($this);
 <body class='no-skin'>
 <?php $this->beginBody() ?>
 
-<?= \common\widgets\ace\Navbar::widget();?>
+<?php
+    // 页面顶部缓存区域
+    if ($this->beginCache(AdminCache::ADMIN_NAVBAR_KEY, ['duration' => 10])) {
+        echo \common\widgets\ace\Navbar::widget();
+        $this->endCache();
+    }
+?>
 
 <div class="main-container ace-save-state" id="main-container">
 	<script type="text/javascript">
@@ -30,7 +37,7 @@ AceAsset::initAcePage($this);
 
 	<?php
 		// 缓存 key = 菜单栏前缀 + 用户登录ID，有效时间 3600 * 12
-		if ($this->beginCache(3306, ['duration' => 10])) {
+		if ($this->beginCache(AdminCache::ADMIN_SIDERBAR_KEY)) {
 			// 导航侧边栏
 			echo \common\widgets\ace\SiderBar::widget();
 			$this->endCache();
@@ -62,7 +69,8 @@ AceAsset::initAcePage($this);
 							overview &amp; stats
 						</small>
 					</h1>
-				</div><!-- /.page-header -->			
+				</div><!-- /.page-header -->
+                <?= \common\widgets\Alert::widget() ?>
 				<?= $content ?>
 			</div>
 		</div>	

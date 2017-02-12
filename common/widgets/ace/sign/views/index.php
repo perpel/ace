@@ -12,11 +12,11 @@
 
     <div class="position-relative">
         
-		<?= $login;?>
-
-		<?= $signup;?>
-
-		<?= $forget;?>
+		<?= $this->render($view, [
+            'model' => $model,
+            'prefix' => "<span class=\"block input-icon input-icon-right\">{input}\n<i class=\"ace-icon fa ",
+            'suffix' => "\"></i></span>\n{hint}\n{error}"
+        ]);?>
 
     </div><!-- /.position-relative -->
 

@@ -18,7 +18,10 @@ class AceAsset extends AssetBundle
 
     public $js = [];
 
-    public $depends = [];
+    public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+    ];
 
     public static function initAcePage($view) {
     	// bootstrap & fontawesome

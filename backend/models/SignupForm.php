@@ -1,8 +1,8 @@
 <?php
 namespace backend\models;
 
+use common\models\ace\Admin;
 use yii\base\Model;
-use common\models\User;
 
 /**
  * Signup form
@@ -12,6 +12,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $repassword;
 
 
     /**
@@ -22,17 +23,33 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\ace\Admin', 'message' => '该用户已被占用！'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\ace\Admin', 'message' => 'T该邮箱已被注册！'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['repassword', 'required'],
+            ['repassword', 'string', 'min' => 6],
+
+            ['repassword', 'compare', 'compareAttribute'=>'password', 'message'=>'两次密码不一致']
+
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => '用户名',
+            'email' => 'Email',
+            'password' => '密码',
+            'repassword' => '重复密码'
         ];
     }
 
@@ -47,7 +64,7 @@ class SignupForm extends Model
             return null;
         }
         
-        $user = new User();
+        $user = new Admin();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
