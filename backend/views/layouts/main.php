@@ -7,7 +7,8 @@ use yii\helpers\Html;
 use common\widgets\ace\Breadcrumbs;
 use common\libs\cache\AdminCache;
 
-AceAsset::initAcePage($this);
+AceAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
