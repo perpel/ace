@@ -5,7 +5,7 @@
 use common\assets\AceAsset;
 use yii\helpers\Html;
 
-AceAsset::initAcePage($this);
+AceAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>

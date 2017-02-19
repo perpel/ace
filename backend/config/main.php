@@ -41,6 +41,22 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' =>false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.163.com',
+                'username' => 'hg_kongdehui@163.com',
+                'password' => 'k1338945',
+                'port' => '25',
+                'encryption' => 'tls',
+            ],
+//            'messageConfig'=>[
+//                'charset'=>'UTF-8',
+//                'from'=>['15618380091@163.com'=>'admin']
+//            ],
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -49,6 +65,11 @@ return [
             ],
         ],
         */
+    ],
+    'modules' => [
+        'basis' => [
+            'class' => 'backend\modules\basis\Module',
+        ],
     ],
     'params' => $params,
 ];
