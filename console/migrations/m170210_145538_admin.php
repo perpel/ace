@@ -4,6 +4,13 @@ use yii\db\Migration;
 
 class m170210_145538_admin extends Migration
 {
+
+    public function init()
+    {
+        $this->db = \Yii::$app->params['aceAdminDB'];
+        parent::init();
+    }
+
     const TABLE = '{{%admin}}';
 
     public function up()

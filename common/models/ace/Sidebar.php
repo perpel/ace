@@ -27,6 +27,11 @@ class Sidebar extends \yii\db\ActiveRecord
         return '{{%sidebar}}';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->get(Yii::$app->params['aceAdminDB']);
+    }
+
     /**
      * @inheritdoc
      */

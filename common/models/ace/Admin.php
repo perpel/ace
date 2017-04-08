@@ -36,6 +36,11 @@ class Admin extends ActiveRecord implements IdentityInterface
         return '{{%admin}}';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->get(Yii::$app->params['aceAdminDB']);
+    }
+
     /**
      * @inheritdoc
      */

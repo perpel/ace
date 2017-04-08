@@ -5,6 +5,12 @@ use yii\db\Migration;
 class m170108_092551_sidebar extends Migration
 {
 
+    public function init()
+    {
+        $this->db = \Yii::$app->params['aceAdminDB'];
+        parent::init();
+    }
+
     const TABLE = '{{%sidebar}}';
 
     public function up()

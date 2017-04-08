@@ -3,10 +3,10 @@ use yii\helpers\Html;
 ?>
 <li class="light-blue dropdown-modal">
     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-        <img class="nav-user-photo" src="ace/images/avatars/<?= Yii::$app->user->identity->avatar?>" alt="Jason's Photo" />
+        <img class="nav-user-photo" src="ace/images/avatars/<?= $avatar?>" alt="Jason's Photo" />
         <span class="user-info">
             <small>Welcome,</small>
-            <?= Yii::$app->user->identity->username?>
+            <?= $username?>
         </span>
 
         <i class="ace-icon fa fa-caret-down"></i>

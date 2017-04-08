@@ -2,6 +2,7 @@
 namespace common\widgets\ace;
 
 use common\models\ace\Sidebar;
+use yii\base\Exception;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -15,10 +16,13 @@ class SiderBar extends Widget
 	*/
 	protected function generateTreeArr()
 	{
-
-	    $nodes = Sidebar::find()
-            ->select(['id', 'parent_id', 'title', 'href', 'icon', 'active', 'sort'])
-            ->asArray()->all();
+        try {
+            $nodes = Sidebar::find()
+                ->select(['id', 'parent_id', 'title', 'href', 'icon', 'active', 'sort'])
+                ->asArray()->all();
+        } catch (Exception $e) {
+            $nodes = [];
+        }
 
 		foreach ($nodes as $v) {
 			$parent_id = $v['parent_id'];

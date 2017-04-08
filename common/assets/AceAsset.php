@@ -14,8 +14,9 @@ class AceAsset extends AssetBundle
     public $baseUrl = '@web/ace';
 
     public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
         'common\assets\AceBaseAsset',
-        'common\assets\AceYiiAsset',
     ];
 
 

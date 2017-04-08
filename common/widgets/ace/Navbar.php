@@ -34,7 +34,12 @@ class Navbar extends Widget
 
     protected function personal() 
     {
-    	return $this->render('navbar/personal');
+        $avatar = \Yii::$app->user->identity->avatar;
+        $username = \Yii::$app->user->identity->username;
+    	return $this->render('navbar/personal', [
+    	    'avatar' => empty($avatar) ? 'default.png' : $avatar,
+    	    'username' => empty($username) ? 'AceAdmin' : $username,
+        ]);
     }
 
 }
