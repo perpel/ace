@@ -2,7 +2,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use common\assets\AceAsset;
+use yiip\ace\web\AceAsset;
 use yii\helpers\Html;
 use common\widgets\ace\Breadcrumbs;
 use common\libs\cache\AdminCache;
